@@ -1,6 +1,6 @@
 const path = require('path')
 
-const resolve = (fileName) => {
+const resolve = (filename) => {
   return path.join(__dirname, filename)
 }
 
