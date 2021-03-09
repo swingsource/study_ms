@@ -1,0 +1,58 @@
+{
+  "id": "2014360",
+  "name": "iconsole",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10506949",
+      "name": "theme",
+      "font_class": "theme",
+      "unicode": "e618",
+      "unicode_decimal": 58904
+    },
+    {
+      "icon_id": "16678585",
+      "name": "layout-4-blocks",
+      "font_class": "layout-4-blocks",
+      "unicode": "e6be",
+      "unicode_decimal": 59070
+    },
+    {
+      "icon_id": "15836340",
+      "name": "setting",
+      "font_class": "setting2",
+      "unicode": "e609",
+      "unicode_decimal": 58889
+    },
+    {
+      "icon_id": "1058925",
+      "name": "search",
+      "font_class": "iconsearch-copy",
+      "unicode": "e62c",
+      "unicode_decimal": 58924
+    },
+    {
+      "icon_id": "7547871",
+      "name": "24gf-heartPulse",
+      "font_class": "24gf-heartPulse",
+      "unicode": "e89a",
+      "unicode_decimal": 59546
+    },
+    {
+      "icon_id": "10562164",
+      "name": "Heart",
+      "font_class": "Heart",
+      "unicode": "e68f",
+      "unicode_decimal": 59023
+    },
+    {
+      "icon_id": "4544130",
+      "name": "logo",
+      "font_class": "logo",
+      "unicode": "e614",
+      "unicode_decimal": 58900
+    }
+  ]
+}

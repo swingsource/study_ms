@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import '@/plugin/normalize.css/index'
 import '@/plugin/elementUI/index'
+import '@/plugin/iconfont/index'
 
 Vue.config.productionTip = false
 
