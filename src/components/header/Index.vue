@@ -5,25 +5,54 @@
       <span class="title">MS蓝狐</span>
     </div>
     <div class="right">
+      <div class="theme">
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            <span class="icon iconfont">&#xe618;</span>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="handleSwitchTheme('dark')"
+              >暗黑模式</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="handleSwitchTheme('light')"
+              >高亮模式</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
+      <div class="layout">
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            <span class="icon iconfont">&#xe6be;</span>
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item @click.native="handleSwitchLayout('tra')"
+              >侧边栏式</el-dropdown-item
+            >
+            <el-dropdown-item @click.native="handleSwitchLayout('card')"
+              >卡片式</el-dropdown-item
+            >
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
       <div class="avatar"></div>
       <div class="username">我在等风</div>
-      <div class="switch-theme">
-        <el-switch
-            v-model="themeType"
-            active-color="#000"
-            inactive-color="#eee">
-        </el-switch>
-      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      themeType: false
+      themeType: false,
     }
+  },
+  methods: {
+    handleSwitchTheme(theme) {},
+    handleSwitchLayout(layout) {
+      this.$router.push(`/${layout}`)
+    },
   },
 }
 </script>
@@ -48,13 +77,18 @@ export default {
   .right
     display flex
     align-items center
+    .theme .icon, .layout .icon
+      margin-right 20px
+      font-size 16px
+      cursor pointer
+    .layout .icon
+      font-size 20px
     .avatar
-      width 24px
-      height 24px
+      margin-right 8px
+      width 22px
+      height 22px
       border-radius 50%
       background green
-    .username, .switch-theme
-      margin-left 10px
     .username
       font-size 14px
 </style>
