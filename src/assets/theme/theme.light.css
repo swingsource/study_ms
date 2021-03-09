@@ -1,4 +1,8 @@
 :root[theme='white']{
-  --theme-color:  white; /* 主题色 */
-  --font-color: black;
+  /* 颜色相关定义 */
+  --color-theme: white;
+  --color-header: black;
+  --color-title: black;
+  --color-desc-main: black;
+  --color-desc-sub: black;
 }

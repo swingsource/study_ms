@@ -11,12 +11,19 @@
             <span class="icon iconfont">&#xe618;</span>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="handleSwitchTheme('dark')"
-              >暗黑模式</el-dropdown-item
+            <el-dropdown-item
+              @click.native="handleSwitchTheme('dark')"
+              class="i-item"
             >
-            <el-dropdown-item @click.native="handleSwitchTheme('light')"
-              >高亮模式</el-dropdown-item
+              <i class="el-icon-check"></i>
+              暗黑模式</el-dropdown-item
             >
+            <el-dropdown-item
+              @click.native="handleSwitchTheme('light')"
+              class="i-item"
+            >
+              <i class="el-icon-check"></i>高亮模式
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -26,12 +33,18 @@
             <span class="icon iconfont">&#xe6be;</span>
           </span>
           <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item @click.native="handleSwitchLayout('tra')"
-              >侧边栏式</el-dropdown-item
+            <el-dropdown-item
+              @click.native="handleSwitchLayout('tra')"
+              class="i-item"
             >
-            <el-dropdown-item @click.native="handleSwitchLayout('card')"
-              >卡片式</el-dropdown-item
+              <i class="el-icon-check"></i>侧边栏式
+            </el-dropdown-item>
+            <el-dropdown-item
+              @click.native="handleSwitchLayout('card')"
+              class="i-item"
             >
+              <i class="el-icon-check"></i>卡片式
+            </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -91,4 +104,10 @@ export default {
       background green
     .username
       font-size 14px
+// 下拉菜单样式
+.i-item
+  display flex
+  flex-flow row nowrap
+  justify-content space-between
+  align-items center
 </style>
