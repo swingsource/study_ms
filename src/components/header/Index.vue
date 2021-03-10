@@ -55,6 +55,8 @@
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
   data() {
     return {
@@ -62,7 +64,11 @@ export default {
     }
   },
   methods: {
-    handleSwitchTheme(theme) {},
+    ...mapMutations(['SET_THEME']),
+    handleSwitchTheme(theme) {
+      document.documentElement.setAttribute('theme', theme)
+      this.SET_THEME(theme)
+    },
     handleSwitchLayout(layout) {
       this.$router.push(`/${layout}`)
     },

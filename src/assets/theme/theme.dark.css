@@ -1,4 +1,12 @@
 :root[theme='dark']{
-  --theme-color:  black; /* 主题色 */
-  --font-color: white;
+  /* 颜色相关定义 */
+  --color-theme: black;
+  --color-header: white;
+  --color-title: white;
+  --color-desc-main: white;
+  --color-desc-sub: white;
+  --color-border: white;
+
+  /* 字体大小相关定义 */
+
 }
