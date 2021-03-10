@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left">
       <img src="./logo.png" alt="" />
-      <span class="title">MS蓝狐</span>
+      <span class="title">山茶籽网管理系统</span>
     </div>
     <div class="right">
       <div class="theme">
@@ -82,8 +82,8 @@ export default {
     display flex
     align-items center
     img
-      width 36px
-      height 36px
+      width 32px
+      height 32px
     .title
       margin-left 12px
       font-size 20px
