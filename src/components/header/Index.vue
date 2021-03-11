@@ -102,7 +102,7 @@ export default {
   flex-flow row nowrap
   justify-content space-between
   align-items center
-  background var(--color-normal)
+  background var(--color-block)
   .left
     display flex
     align-items center
