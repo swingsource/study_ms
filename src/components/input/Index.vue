@@ -6,7 +6,12 @@
       :placeholder="placeholder"
       v-model="currentValue"
     />
-    <label class="input-label">{{ placeholder }}</label>
+    <label class="input-label">{{ label }}</label>
+    <div class="input-slot" v-if="icon">
+      <slot>
+        <span class="icon iconfont" v-html="icon"></span>
+      </slot>
+    </div>
   </div>
 </template>
 
@@ -31,6 +36,9 @@ export default {
       type: String,
       required: true,
     },
+    icon: {
+      type: String
+    }
   },
   model: {
     prop: 'value',
@@ -61,11 +69,12 @@ export default {
     &:focus
       outline none
   .input-fill
+    box-sizing border-box
     height 36px
     width 100%
-    padding 0 12px
+    padding 0 12px 0 30px
     line-height 36px
-    border-radius 7px
+    border-radius 18px
     font-size 16px
     color #000
     transition all .2s
@@ -75,16 +84,20 @@ export default {
     &:focus
       border 1px solid #2486ff
     &:not(:placeholder-shown) ~ .input-label, &:focus ~ .input-label
-      transform scale(.8) translate3d(0, -30px, 0)
+      transform scale(.8) translate3d(0, -32px, 0)
       background transparent
       color orange
   .input-label
     position absolute
-    top 11px
-    left 12px
-    font-size 16px
+    top 10px
+    left 30px
+    font-size 14px
     color #50a3a2
     transition all .2s
     transform-origin 0 0
     pointer-events none
+  .input-slot
+    position absolute
+    top 9px
+    left 8px
 </style>
