@@ -64,12 +64,13 @@ export default {
     }
   },
   methods: {
-    ...mapMutations(['SET_THEME']),
+    ...mapMutations(['SET_THEME', 'SET_LAYOUT']),
     handleSwitchTheme(theme) {
       document.documentElement.setAttribute('theme', theme)
       this.SET_THEME(theme)
     },
     handleSwitchLayout(layout) {
+      this.SET_LAYOUT(layout)
       this.$router.push(`/${layout}`)
     },
   },
