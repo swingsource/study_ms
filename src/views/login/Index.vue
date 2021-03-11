@@ -3,7 +3,7 @@
     <div class="login-img">
       <div class="web-name">
         <img src="./logo.png" alt="" />
-        <span>啊吧啊吧</span>
+        <span>欢迎使用山茶籽管理系统</span>
       </div>
       <div class="web-desc">寻找灵感，发现精彩</div>
       <img class="svg" src="./login.svg" alt="" />
@@ -15,15 +15,27 @@
           placeholder="请输入用户名"
           type="text"
           v-model="account"
+          icon="&#xe655;"
         ></my-input>
+        <my-input
+            label="密码"
+            placeholder="请输入密码"
+            type="password"
+            v-model="password"
+            icon="&#xe60f;"
+            style="margin-top: 24px;"
+        ></my-input>
+        <div class="btn-submit" @click="handleSubmit">登 录</div>
       </div>
-      <button @click="handleClick">test</button>
+      <div class="tips">-- 时光静好与君语，细水流年与君同</div>
     </div>
   </div>
 </template>
 
 <script>
 import MyInput from 'cps/input/Index'
+
+import { mapState } from 'vuex'
 
 export default {
   data() {
@@ -35,10 +47,13 @@ export default {
   components: {
     MyInput,
   },
+  computed: {
+    ...mapState(['layout'])
+  },
   methods: {
-    handleClick() {
-      console.log(this.account)
-    },
+    handleSubmit () {
+      this.$router.push(`/${this.layout}`)
+    }
   },
 }
 </script>
@@ -65,6 +80,7 @@ export default {
       img
         width 42px
         height 42px
+        animation my-rotate 4.8s infinite linear
       span
         margin-left 20px
     .web-desc
@@ -85,8 +101,25 @@ export default {
     flex-flow column nowrap
     justify-content center
     align-items center
-    background #eee
+    background #f8f8f8
     .login-form
       width 20vw
-      height 400px
+      height 240px
+      .btn-submit
+        margin-top 30px
+        width 100%
+        height 36px
+        line-height 36px
+        text-align center
+        background orange
+        border-radius 32px
+        cursor pointer
+    .tips
+      font-size 14px
+      margin-top 6vh
+ @keyframes my-rotate
+   0%
+     transform rotate(0)
+   100%
+     transform rotate(360deg)
 </style>
