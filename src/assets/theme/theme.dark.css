@@ -1,12 +1,35 @@
 :root[theme='dark']{
-  /* 颜色相关定义 */
-  --color-theme: black;
-  --color-header: white;
-  --color-title: white;
-  --color-desc-main: white;
-  --color-desc-sub: white;
-  --color-border: white;
+  /* 基本颜色相关定义 */
+  --color-normal: #000000;
+  --color-block: #151518;
+  --color-border: #dcdee2;
 
-  /* 字体大小相关定义 */
+  --color-primary: #2d8cf0;
+  --color-primary-border: #1c3c5b;
+  --color-primary-block: #131e2e;
+
+  --color-success: #19be6b;
+  --color-success-border: #184f35;
+  --color-success-block: #11241f;
+
+  --color-warning: #ff9900;
+  --color-warning-border: #614112;
+  --color-warning-block: #302114;
+
+  --color-error: #ed4014;
+  --color-error-border: #5c2317;
+  --color-error-block: #2c1413;
+
+  /* 字体相关颜色 */
+  --font-color-title: #ffffff;
+  --font-color-desc: #808695;
+  --font-color-content: #515a6e;
+  --font-color-icon: #808695;
+
+  /* 字体大小 */
+  --font-size-little: 12px;
+  --font-size-normal: 14px;
+  --font-size-big: 16px;
+  --font-size-bigger: 18px;
 
 }
