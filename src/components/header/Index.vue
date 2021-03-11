@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left">
       <img src="./logo.png" alt="" />
-      <span class="title">山茶籽网管理系统</span>
+      <span class="title">iview test</span>
     </div>
     <div class="right">
       <div class="theme">
@@ -15,14 +15,15 @@
               @click.native="handleSwitchTheme('dark')"
               class="i-item"
             >
-              <i class="el-icon-check"></i>
+              <i class="el-icon-check" v-if="currentTheme === 'dark'"></i>
               暗黑模式</el-dropdown-item
             >
             <el-dropdown-item
               @click.native="handleSwitchTheme('light')"
               class="i-item"
             >
-              <i class="el-icon-check"></i>高亮模式
+              <i class="el-icon-check" v-if="currentTheme === 'light'"></i
+              >高亮模式
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -37,13 +38,15 @@
               @click.native="handleSwitchLayout('tra')"
               class="i-item"
             >
-              <i class="el-icon-check"></i>侧边栏式
+              <i class="el-icon-check" v-if="currentLayout === 'tra'"></i
+              >侧边栏式
             </el-dropdown-item>
             <el-dropdown-item
               @click.native="handleSwitchLayout('card')"
               class="i-item"
             >
-              <i class="el-icon-check"></i>卡片式
+              <i class="el-icon-check" v-if="currentLayout === 'card'"></i
+              >卡片式
             </el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
@@ -55,20 +58,35 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   data() {
     return {
       themeType: false,
+      currentTheme: this.$store.state.theme,
+      currentLayout: this.$store.state.layout,
     }
+  },
+  computed: {
+    ...mapState(['theme', 'layout']),
+  },
+  watch: {
+    theme(nv) {
+      this.currentTheme = nv
+    },
+    layout(nv) {
+      this.currentLayout = nv
+    },
   },
   methods: {
     ...mapMutations(['SET_THEME']),
+    // 切换主题
     handleSwitchTheme(theme) {
       document.documentElement.setAttribute('theme', theme)
       this.SET_THEME(theme)
     },
+    // 切换布局
     handleSwitchLayout(layout) {
       this.$router.push(`/${layout}`)
     },
@@ -78,12 +96,13 @@ export default {
 
 <style scoped lang="stylus">
 .header
-  margin 0 20px
+  padding 0 20px
   height 100%
   display flex
   flex-flow row nowrap
   justify-content space-between
   align-items center
+  background var(--color-normal)
   .left
     display flex
     align-items center
@@ -93,6 +112,7 @@ export default {
     .title
       margin-left 12px
       font-size 20px
+      color var(--font-color-title)
   .right
     display flex
     align-items center
@@ -100,6 +120,7 @@ export default {
       margin-right 20px
       font-size 16px
       cursor pointer
+      color var(--font-color-icon)
     .layout .icon
       font-size 20px
     .avatar
@@ -107,13 +128,18 @@ export default {
       width 22px
       height 22px
       border-radius 50%
-      background green
+      background var(--color-primary)
+      cursor pointer
     .username
-      font-size 14px
+      font-size var(--font-size-normal)
+      color var(--font-color-desc)
+      cursor pointer
 // 下拉菜单样式
 .i-item
   display flex
   flex-flow row nowrap
-  justify-content space-between
+  justify-content flex-end
   align-items center
+  .el-icon-check
+    color var(--color-primary)
 </style>

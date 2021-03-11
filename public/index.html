@@ -5,8 +5,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <style type="text/css">html,body{height:100%;}</style>
     <title><%= htmlWebpackPlugin.options.title %></title>
+    <style type="text/css">
+      html,body{height:100%;}
+      /* 下拉菜单 */
+      .el-dropdown-menu{
+        background-color: var(--color-normal) !important;
+        border: 1px solid var(--color-border) !important;
+      }
+      .el-dropdown-menu__item{
+        background: var(--color-block);
+      }
+      .el-dropdown-menu__item:focus, .el-dropdown-menu__item:not(.is-disabled):hover {
+        background-color: #ecf5ff !important;
+        color: var(--color-primary) !important;
+      }
+      .el-popper[x-placement^=bottom] .popper__arrow::after {
+          border-bottom-color: var(--color-block) !important;
+      }
+    </style>
   </head>
   <body>
     <noscript>
