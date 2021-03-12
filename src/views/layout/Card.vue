@@ -25,11 +25,12 @@ export default {
 <style scoped lang="stylus">
 .card
   height 100%
+  overflow hidden
   .header-wrapper
     height 60px
   .main-wrapper
-    height calc(100% - 60px)
-    overflow auto
-    padding 20px
+    height calc(100% - 60px - 40px)
+    overflow-y auto
+    padding 40px
     background var(--color-normal)
 </style>
