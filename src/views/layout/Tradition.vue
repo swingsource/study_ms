@@ -3,51 +3,33 @@
     <div class="header-wrapper">
       <i-header></i-header>
     </div>
-    <div class="main-wrapper"
-         ref="mainWrapper"
-         :style="`--bg-color-normal: var(--color-error);--bg-color-block:var(--color-block)`">
+    <div
+      class="main-wrapper"
+      ref="mainWrapper"
+      style="--bg-color-normal: var(--color-error);--bg-color-block:var(--color-block);--text-color:var(--font-color-main);"
+    >
       <div class="left">
         <el-menu
-            default-active="2"
-            class="el-menu-vertical-demo"
-            @open="handleOpen"
-            @close="handleClose"
-            :background-color="color_block"
-            text-color="#fff"
-            active-text-color="#ffd04b">
-          <el-submenu index="1">
-            <template slot="title">
-              <i class="el-icon-location"></i>
-              <span>导航一</span>
-            </template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="1-1">选项1</el-menu-item>
-              <el-menu-item index="1-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="1-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="1-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="1-4-1">选项1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
+          default-active="0"
+          class="el-menu-vertical-demo"
+          :background-color="color_block"
+          :text-color="color_font"
+          :active-text-color="color_font"
+        >
+          <el-menu-item
+            v-for="(item, index) of navList"
+            :key="index"
+            :index="index + ''"
+            @click="handleClickNav(item.path)"
+          >
+            <i :class="item.icon"></i>
+            <span slot="title">{{ item.name }}</span>
           </el-menu-item>
         </el-menu>
       </div>
-      <div class="right">我是右侧，内容显示区域</div>
+      <div class="right">
+        <router-view></router-view>
+      </div>
     </div>
   </div>
 </template>
@@ -55,37 +37,53 @@
 <script>
 import IHeader from 'cps/header/Index'
 
+import { mapState } from 'vuex'
+import { navList } from '@/config/navList'
+
 export default {
   data() {
     return {
-      color_normal: document.documentElement,
-      color_block: this.$refs['mainWrapper'].style.getPropertyValue('--bg-color-block'),
-      theme: this.$store.state.theme
+      color_normal: '',
+      color_block: '',
+      color_font: '',
+      navList,
     }
   },
   components: {
     IHeader,
   },
   mounted() {
-    console.log(this.$refs['mainWrapper'])
-    console.log(this.$refs['mainWrapper'].style)
-    console.log(this.$refs['mainWrapper'].style.getPropertyValue('--bg-color-normal'))
+    this.color_normal = this.$refs['mainWrapper'].style.getPropertyValue(
+      '--bg-color-normal'
+    )
+    this.color_block = this.$refs['mainWrapper'].style.getPropertyValue(
+      '--bg-color-block'
+    )
+    this.color_font = this.$refs['mainWrapper'].style.getPropertyValue(
+      '--text-color'
+    )
+  },
+  computed: {
+    ...mapState(['theme']),
   },
   watch: {
-    theme (nv) {
-      this.color_normal = this.$refs['mainWrapper'].style.getPropertyValue('--bg-color-normal')
-      this.color_block = this.$refs['mainWrapper'].style.getPropertyValue('--bg-color-block')
-      console.log(this.color_block)
-    }
+    theme(nv) {
+      this.color_normal = this.$refs['mainWrapper'].style.getPropertyValue(
+        '--bg-color-normal'
+      )
+      this.color_block = this.$refs['mainWrapper'].style.getPropertyValue(
+        '--bg-color-block'
+      )
+      this.color_font = this.$refs['mainWrapper'].style.getPropertyValue(
+        '--text-color'
+      )
+    },
   },
   methods: {
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath)
+    handleClickNav(path) {
+      this.$router.push(`/tra/${path}`)
     },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath)
-    }
-  }
+  },
 }
 </script>
 
@@ -100,9 +98,20 @@ export default {
     flex-flow row nowrap
     .left
       width 240px
-      background var(--color-normal)
+      overflow auto
+      background var(--color-block)
     .right
       flex 1
+      padding 20px
+      overflow auto
       background var(--color-normal)
-      border-left 1px solid var(--color-border)
+// 样式穿透element
+// 修改菜单激活状态下的背景色
+>>> .el-submenu__title:hover, >>> .el-menu-item:hover
+  background var(--color-primary-lighter) !important
+>>> .is-active
+  background var(--color-primary) !important
+// 去掉menu右边框
+>>> .el-menu
+  border-right none
 </style>

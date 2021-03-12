@@ -3,7 +3,9 @@
     <div class="header-wrapper">
       <i-header></i-header>
     </div>
-    <div class="main-wrapper">内容区域</div>
+    <div class="main-wrapper">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -27,5 +29,7 @@ export default {
     height 60px
   .main-wrapper
     height calc(100% - 60px)
-    background #eee
+    overflow auto
+    padding 20px
+    background var(--color-normal)
 </style>
