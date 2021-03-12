@@ -10,5 +10,8 @@ module.exports = {
       .set('@', resolve('src'))
       .set('cps', resolve('src/components'))
       .set('core', resolve('src/core'))
+  },
+  devServer: {
+    disableHostCheck: true
   }
 }
