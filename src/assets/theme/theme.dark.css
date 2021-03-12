@@ -7,24 +7,28 @@
   --color-primary: #2d8cf0;
   --color-primary-border: #1c3c5b;
   --color-primary-block: #131e2e;
+  --color-primary-lighter: #131e2e;
 
   --color-success: #19be6b;
   --color-success-border: #184f35;
   --color-success-block: #11241f;
+  --color-success-lighter: #e1f3d8;
 
   --color-warning: #ff9900;
   --color-warning-border: #614112;
   --color-warning-block: #302114;
+  --color-success-lighter: #faecd8;
 
   --color-error: #ed4014;
   --color-error-border: #5c2317;
   --color-error-block: #2c1413;
+  --color-success-lighter: #fde2e2;
 
   /* 字体相关颜色 */
-  --font-color-title: #ffffff;
-  --font-color-desc: #808695;
-  --font-color-content: #515a6e;
-  --font-color-icon: #808695;
+  --font-color-main: #ffffff;
+  --font-color-regular: #515a6e;
+  --font-color-sub: #909399;
+  --font-color-placeholder: #808695;
 
   /* 字体大小 */
   --font-size-little: 12px;

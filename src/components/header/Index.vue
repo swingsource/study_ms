@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left">
       <img src="./logo.png" alt="" />
-      <span class="title">山茶籽网管理系统</span>
+      <span class="title">elementUI test</span>
     </div>
     <div class="right">
       <div class="theme">
@@ -112,7 +112,7 @@ export default {
     .title
       margin-left 12px
       font-size 20px
-      color var(--font-color-title)
+      color var(--font-color-main)
   .right
     display flex
     align-items center
@@ -120,7 +120,7 @@ export default {
       margin-right 20px
       font-size 16px
       cursor pointer
-      color var(--font-color-icon)
+      color var(--font-color-placeholder)
     .layout .icon
       font-size 20px
     .avatar
@@ -132,7 +132,7 @@ export default {
       cursor pointer
     .username
       font-size var(--font-size-normal)
-      color var(--font-color-desc)
+      color var(--font-color-sub)
       cursor pointer
 // 下拉菜单样式
 .i-item
