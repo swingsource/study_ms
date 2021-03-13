@@ -6,7 +6,7 @@
     <div
       class="main-wrapper"
       ref="mainWrapper"
-      style="--bg-color-normal: var(--color-error);--bg-color-block:var(--color-block);--text-color:var(--font-color-main);"
+      style="--bg-color-normal: var(--color-normal);--bg-color-block:var(--color-block);--text-color:var(--font-color-main);"
     >
       <div class="left">
         <el-menu

@@ -54,7 +54,7 @@ export default {
       width calc(100vw / 6)
       height 0
       padding-bottom calc(100vw / 10)
-      margin-right calc(100vw / 12)
+      margin-right calc(100vw / 16)
       margin-bottom calc(100vw / 24)
       background var(--color-block)
       border-radius 6px

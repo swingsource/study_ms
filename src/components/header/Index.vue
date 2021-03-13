@@ -52,7 +52,20 @@
         </el-dropdown>
       </div>
       <div class="avatar"></div>
-      <div class="username">我在等风</div>
+      <div class="username">
+        <el-dropdown>
+          <span class="el-dropdown-link">
+            我在等风
+          </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item
+                @click.native="handleLogout"
+                class="i-item"
+            >退出登录
+            </el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
   </div>
 </template>
@@ -90,6 +103,10 @@ export default {
       this.SET_LAYOUT(layout)
       this.$router.push(`/${layout}`)
     },
+    // 退出登录
+    handleLogout () {
+      this.$router.push('/login')
+    }
   },
 }
 </script>
