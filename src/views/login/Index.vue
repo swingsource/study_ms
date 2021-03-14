@@ -3,7 +3,7 @@
     <div class="login-img">
       <div class="web-name">
         <img src="./logo.png" alt="" />
-        <span>欢迎使用山茶籽管理系统</span>
+        <span>欢迎使用山茶学习网管理系统</span>
       </div>
       <div class="web-desc">寻找灵感，发现精彩</div>
       <img class="svg" src="./login.svg" alt="" />
@@ -27,7 +27,7 @@
         ></my-input>
         <div class="btn-submit" @click="handleSubmit">登 录</div>
       </div>
-      <div class="tips">-- 时光静好与君语，细水流年与君同</div>
+<!--      <div class="tips">&#45;&#45; 时光静好与君语，细水流年与君同</div>-->
     </div>
   </div>
 </template>
@@ -63,6 +63,7 @@ export default {
   height 100%
   display flex
   box-sizing border-box
+  background var(--color-normal)
   .login-img
     padding 6vh 3vw 6vh 6vh
     flex 1
@@ -74,13 +75,13 @@ export default {
       width 100%
       margin-top -12vh
       font-size 30px
-      color var(--color-header)
+      color var(--font-color-main)
       display flex
       align-items center
       img
         width 42px
         height 42px
-        animation my-rotate 4.8s infinite linear
+        animation my-rotate 4.2s infinite linear
       span
         margin-left 20px
     .web-desc
@@ -90,6 +91,7 @@ export default {
       font-size 32px
       font-weight lighter
       text-align right
+      color var(--font-color-main)
     img.svg
       margin-top -8vh
       width 32vw
@@ -101,9 +103,8 @@ export default {
     flex-flow column nowrap
     justify-content center
     align-items center
-    background #f8f8f8
     .login-form
-      width 20vw
+      width 24vw
       height 240px
       .btn-submit
         margin-top 30px
@@ -111,9 +112,10 @@ export default {
         height 36px
         line-height 36px
         text-align center
-        background orange
-        border-radius 32px
+        background var(--color-primary)
+        border-radius 6px
         cursor pointer
+        color var(--font-color-main)
     .tips
       font-size 14px
       margin-top 6vh

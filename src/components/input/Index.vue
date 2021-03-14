@@ -74,25 +74,27 @@ export default {
     width 100%
     padding 0 12px 0 30px
     line-height 36px
-    border-radius 18px
+    border-radius 6px
     font-size 16px
-    color #000
+    color var(--color-primary)
     transition all .2s
     border 1px solid #666
     &:placeholder-shown::placeholder
       color transparent
     &:focus
-      border 1px solid #2486ff
+      border 1px solid var(--color-primary)
+      & ~ div.input-slot span
+        color var(--color-primary)
     &:not(:placeholder-shown) ~ .input-label, &:focus ~ .input-label
       transform scale(.8) translate3d(0, -32px, 0)
       background transparent
-      color orange
+      color var(--font-color-placeholder)
   .input-label
     position absolute
     top 10px
     left 30px
     font-size 14px
-    color #50a3a2
+    color var(--font-color-placeholder)
     transition all .2s
     transform-origin 0 0
     pointer-events none
@@ -100,4 +102,6 @@ export default {
     position absolute
     top 9px
     left 8px
+    .icon
+      color var(--font-color-placeholder)
 </style>

@@ -28,7 +28,9 @@
         </el-menu>
       </div>
       <div class="right">
-        <router-view></router-view>
+        <transition name="el-zoom-in-center">
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
   </div>

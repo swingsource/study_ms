@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left">
       <img src="./logo.png" alt="" />
-      <span class="title">elementUI test</span>
+      <span class="title">山茶学习网管理系统</span>
     </div>
     <div class="right">
       <div class="theme">
