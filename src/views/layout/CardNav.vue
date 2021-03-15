@@ -1,7 +1,16 @@
 <template>
   <div class="card-nav">
     <div class="nav-card-wrapper">
-      <div class="card" v-for="(item, index) of nav" :key="index + item.path">
+      <div
+        class="card"
+        v-for="(item, index) of nav"
+        :key="index + item.path"
+        :style="{
+          background: `url(${item.img}) no-repeat center center`,
+          'background-size': '100% 100%',
+        }"
+        @click="handleClickNav(item)"
+      >
         <div class="name">{{ item.name }}</div>
       </div>
     </div>
@@ -35,7 +44,11 @@ export default {
   mounted() {
     this.nav = navList
   },
-  methods: {},
+  methods: {
+    handleClickNav(item) {
+      this.$router.push(`/card/${item.path}`)
+    },
+  },
 }
 </script>
 
@@ -59,14 +72,23 @@ export default {
       background var(--color-block)
       border-radius 6px
       cursor pointer
+      &:hover
+        transform scale3d(1.1, 1.1, 1)
+        transition all .4s ease
       .name
         position absolute
-        height 20px
-        line-height 20px
-        left 20px
-        bottom 30px
+        height 50px
+        line-height 50px
+        left 0
+        bottom 0
+        width 100%
+        box-sizing border-box
+        padding-left 40px
+        background rgba(0, 0, 0, .3)
         font-size var(--font-size-big)
-        color var(--font-color-main)
+        color var(--color-normal)
+        overflow hidden
+        border-radius 0 0 6px 6px
   .personal-card
     box-sizing border-box
     height 360px
