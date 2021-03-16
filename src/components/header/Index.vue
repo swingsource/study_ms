@@ -219,6 +219,7 @@ export default {
   font-size var(--font-size-normal)
   color var(--font-color-main)
   cursor pointer
+  z-index 9
   .current-nav
     //
   .nav-list
