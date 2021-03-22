@@ -12,6 +12,11 @@ module.exports = {
       .set('core', resolve('src/core'))
   },
   devServer: {
-    disableHostCheck: true
+    disableHostCheck: true,
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+      }
+    }
   }
 }
