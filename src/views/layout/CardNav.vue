@@ -34,6 +34,7 @@
 
 <script>
 import { navList } from '@/config/navList'
+import { mapState, mapMutations } from 'vuex'
 
 export default {
   data() {
@@ -44,9 +45,14 @@ export default {
   mounted() {
     this.nav = navList
   },
+  computed: {
+    ...mapState(['currentNav'])
+  },
   methods: {
+    ...mapMutations(['SET_CURRENT_NAV']),
     handleClickNav(item) {
       this.$router.push(`/card/${item.path}`)
+      this.SET_CURRENT_NAV(item.path)
     },
   },
 }

@@ -4,11 +4,11 @@
       <img src="./logo.png" alt="" />
       <span class="title">elementui test</span>
       <!-- card模式下，进入详情页面之后才会显示出来的导航菜单 -->
-      <div class="nav-card-wrapper">
-        <div class="current-nav">
-          {{ currentNav }} <i class="el-icon-arrow-down"></i>
+      <div class="nav-card-wrapper" v-if="layout === 'card' && showCurrentNav">
+        <div class="current-nav" @click="handleClickCurrentNav">
+          {{ currentNavName }} <i class="el-icon-arrow-down"></i>
         </div>
-        <div class="nav-list">
+        <div class="nav-list" :class="{'nav-list-show': showNavList}" @mouseleave="handleMouseoutNavList">
           <div
             class="row"
             v-for="(row, rindex) of currentNavList"
@@ -111,17 +111,20 @@ export default {
     return {
       currentTheme: this.$store.state.theme,
       currentLayout: this.$store.state.layout,
-      currentNav: '', // 当前路由
+      currentNavName: '', // 当前路由name
       currentNavList: [],
       checking: '', // 鼠标滑过路由
+      showCurrentNav: false, // 是否展示nav缩略图当前菜单
+      showNavList: false, // 是否展示nav缩略图列表
     }
   },
   computed: {
-    ...mapState(['theme', 'layout']),
+    ...mapState(['theme', 'layout', 'currentNav']),
   },
   mounted() {
     this.currentNavList = groupArray(navList, colNum)
-    this.currentNav = this.$route.meta.navName
+    this.currentNavName = this.$route.meta.navName
+    this.showCurrentNav = this.currentNav !== 'home'
   },
   watch: {
     theme(nv) {
@@ -130,12 +133,14 @@ export default {
     layout(nv) {
       this.currentLayout = nv
     },
-    $route(nv) {
-      this.currentNav = nv.meta.navName
+    $route(nv, ov) {
+      this.currentNavName = nv.meta.navName
+      // card布局下，如果当前路由为首页，则不展示nav缩略图
+      this.showCurrentNav = nv.path !== '/card/home'
     },
   },
   methods: {
-    ...mapMutations(['SET_THEME', 'SET_LAYOUT']),
+    ...mapMutations(['SET_THEME', 'SET_LAYOUT', 'SET_CURRENT_NAV']),
     // 切换主题
     handleSwitchTheme(theme) {
       document.documentElement.setAttribute('theme', theme)
@@ -153,9 +158,19 @@ export default {
     handleMouseout(ref) {
       this.checking = ''
     },
+    // 鼠标划出navWrapper
+    handleMouseoutNavList () {
+      this.showNavList = false
+    },
     // 点击nav
     handleClickNav(nav) {
       this.$router.push(`/card/${nav.path}`)
+      this.showNavList = false
+      this.SET_CURRENT_NAV(nav.path)
+    },
+    // 点击当前所在的nav
+    handleClickCurrentNav () {
+      this.showNavList = true
     },
     // 退出登录
     handleLogout() {
@@ -223,14 +238,21 @@ export default {
   .current-nav
     //
   .nav-list
+    display none
     position absolute
     left -30px
-    top 30px
+    top 10px
     padding 20px
     background var(--color-block)
     border-radius 4px
     border 1px solid var(--color-border)
     box-shadow 0 0 10px 3px var(--color-block)
+    transition all .2s ease
+    opacity 0
+    &.nav-list-show
+      display block
+      top 30px
+      opacity 1
     &::before
       position absolute
       left 42px
