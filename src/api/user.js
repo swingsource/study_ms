@@ -2,12 +2,13 @@ import instance from '@/util/http'
 
 /**
  * 获取用户列表
- * @param 
+ * @param
  * @returns {AxiosPromise}
  */
-export const getUserList = () => {
+export const getUserList = (params) => {
     return instance({
-        url: '/api/user/getDate',
-        method: 'get'
+        url: '/api/user/getUserList',
+        method: 'get',
+        params
     })
 }

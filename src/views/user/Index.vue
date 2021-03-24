@@ -10,7 +10,7 @@
           </el-select>
         </el-form-item>
         <el-form-item>
-          <el-input v-model="form.user" placeholder="用户名"></el-input>
+          <el-input v-model="form.username" placeholder="用户名"></el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" size="medium" @click="handleSearch">查询</el-button>
@@ -23,12 +23,12 @@
     <div class="table-wrapper">
       <template>
         <el-table
-            :data="dataList"
+            :data="renderUserList"
             border
             style="width: 100%">
           <el-table-column
-              type="index"
-              :index="indexMethod">
+              align="center"
+              type="index">
           </el-table-column>
           <el-table-column
               prop="userType"
@@ -82,7 +82,6 @@
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
               <el-button type="primary" size="mini" icon="el-icon-edit" circle></el-button>
-              <el-button type="primary" size="mini" icon="el-icon-refresh" circle></el-button>
               <el-button type="danger" size="mini" icon="el-icon-delete" circle></el-button>
             </template>
           </el-table-column>
@@ -90,13 +89,26 @@
       </template>
 
     </div>
+    <!-- 分页组件 -->
+    <pagination :page-num="page.pageSize"
+                :page-size="page.pageSize"
+                :total="page.total"
+                @handleSizeChange="handleSizeChange"
+                @handleCurrentChange="handleCurrentChange"
+    ></pagination>
   </div>
 </template>
 
 <script>
   import { getUserList } from "@/api/user"
+  import { fePagination } from "@/util/utils"
+
+  import Pagination from 'core/pagination/Index'
 
   export default {
+    components: {
+      Pagination
+    },
     data () {
       return {
         page: {
@@ -108,23 +120,46 @@
           userType: '',
           username: ''
         },
-        dataList: [{
-          date: '2016-05-02',
-          name: '王小虎',
-          address: '上海市普陀区金沙江路 1518 弄'
-        }]
+        userList: [],
+        renderUserList: []
       }
     },
     mounted() {
-      getUserList().then(res => {
-        this.dataList = res.data.data
-      })
+      this.getAllUserList()
     },
     methods: {
-      indexMethod () {
-        return 1
+      // 获取所有用户
+      getAllUserList () {
+        const params = {
+          userType: this.form.userType,
+          username: this.form.username
+        }
+        getUserList(params).then(res => {
+          if (res.data.code === 200) {
+            this.userList = res.data.data
+            this.page.total = this.userList.length
+            // 分页
+            this.getRenderUserList()
+          }
+        })
       },
-      handleSearch () {},
+      // 分页获取 user
+      getRenderUserList () {
+        this.renderUserList = fePagination(this.userList, this.page.pageSize, this.page.pageNum)
+      },
+      // 分页方法
+      handleSizeChange (val) {
+        this.page.pageSize = val
+        this.getRenderUserList()
+      },
+      handleCurrentChange (val) {
+        this.page.pageNum = val
+        this.getRenderUserList()
+      },
+      // 查询
+      handleSearch () {
+        this.getAllUserList()
+      },
       handleAdd () {}
     }
   }
