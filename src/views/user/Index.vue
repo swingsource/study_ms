@@ -6,7 +6,7 @@
           <el-select v-model="form.userType" placeholder="用户类型">
             <el-option label="全部" value=""></el-option>
             <el-option label="管理员" value="admin"></el-option>
-            <el-option label="前台用户" value="user"></el-option>
+            <el-option label="前端用户" value="user"></el-option>
           </el-select>
         </el-form-item>
         <el-form-item>
@@ -37,7 +37,7 @@
               width="180">
             <template slot-scope="scope">
               <span v-if="scope.row.userType === 'admin'">管理员</span>
-              <span v-else>前台用户</span>
+              <span v-else>前端用户</span>
             </template>
           </el-table-column>
           <el-table-column
@@ -81,8 +81,8 @@
           </el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
-              <el-button type="primary" size="mini" icon="el-icon-edit" circle></el-button>
-              <el-button type="danger" size="mini" icon="el-icon-delete" circle></el-button>
+              <el-button type="primary" size="mini" icon="el-icon-edit" circle @click="handleUpdate(scope.row)"></el-button>
+              <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="handleDel(scope.row)"></el-button>
             </template>
           </el-table-column>
         </el-table>
@@ -96,18 +96,26 @@
                 @handleSizeChange="handleSizeChange"
                 @handleCurrentChange="handleCurrentChange"
     ></pagination>
+    <!-- 添加用户 -->
+    <add-dialog v-model="visibleAdd" @success="handleReloadData"></add-dialog>
+    <!-- 修改用户 -->
+    <update-dialog v-model="visibleUpdate" :row="currentRow" @success="handleReloadData"></update-dialog>
   </div>
 </template>
 
 <script>
-  import { getUserList } from "@/api/user"
+  import { getUserList, delUser } from "@/api/user"
   import { fePagination } from "@/util/utils"
 
   import Pagination from 'core/pagination/Index'
+  import AddDialog from './Add'
+  import UpdateDialog from './Update'
 
   export default {
     components: {
-      Pagination
+      Pagination,
+      AddDialog,
+      UpdateDialog
     },
     data () {
       return {
@@ -121,7 +129,10 @@
           username: ''
         },
         userList: [],
-        renderUserList: []
+        renderUserList: [],
+        visibleAdd: false,
+        visibleUpdate: false,
+        currentRow: {}, // 当前操作的行数据
       }
     },
     mounted() {
@@ -140,6 +151,11 @@
             this.page.total = this.userList.length
             // 分页
             this.getRenderUserList()
+          } else {
+            this.$message({
+              type: 'error',
+              message: res.data.msg
+            })
           }
         })
       },
@@ -160,7 +176,39 @@
       handleSearch () {
         this.getAllUserList()
       },
-      handleAdd () {}
+      // 添加
+      handleAdd () {
+        this.visibleAdd = true
+      },
+      // 修改
+      handleUpdate (row) {
+        this.visibleUpdate = true
+        this.currentRow = row
+      },
+      // 删除
+      handleDel (row) {
+        delUser({id: row.id}).then(res => {
+          if (res.data.code === 200) {
+            this.$message({
+              type: 'success',
+              message: res.data.msg
+            })
+            // 更新数据
+            this.handleReloadData()
+          } else {
+            this.$message({
+              type: 'error',
+              message: res.data.msg
+            })
+          }
+        })
+      },
+      // 重新加载数据
+      handleReloadData () {
+        this.form.userType = ''
+        this.form.username = ''
+        this.getAllUserList()
+      }
     }
   }
 </script>
@@ -169,5 +217,7 @@
 .index
   .operate-bar
     display flex
-    flex-direction row-reverse
+    flex-flow row nowrap
+    justify-content flex-end
+    align-items center
 </style>
