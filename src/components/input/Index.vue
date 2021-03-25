@@ -70,10 +70,10 @@ export default {
       outline none
   .input-fill
     box-sizing border-box
-    height 36px
+    height 40px
     width 100%
     padding 0 12px 0 30px
-    line-height 36px
+    line-height 40px
     border-radius 6px
     font-size 16px
     color var(--color-primary)
@@ -86,12 +86,12 @@ export default {
       & ~ div.input-slot span
         color var(--color-primary)
     &:not(:placeholder-shown) ~ .input-label, &:focus ~ .input-label
-      transform scale(.8) translate3d(0, -32px, 0)
+      transform scale(.8) translate3d(0, -34px, 0)
       background transparent
       color var(--font-color-placeholder)
   .input-label
     position absolute
-    top 10px
+    top 12px
     left 30px
     font-size 14px
     color var(--font-color-placeholder)

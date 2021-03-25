@@ -14,18 +14,6 @@
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password"></el-input>
         </el-form-item>
-        <el-form-item label="性别" prop="gender">
-          <el-radio-group v-model="form.gender">
-            <el-radio label="male">男</el-radio>
-            <el-radio label="female">女</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="电话" prop="phone">
-          <el-input v-model="form.phone"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="form.email"></el-input>
-        </el-form-item>
       </el-form>
     </div>
     <div slot="footer">
@@ -64,10 +52,7 @@ export default {
       form: {
         userType: '',
         username: '',
-        password: '',
-        gender: '',
-        phone: '',
-        email: ''
+        password: ''
       },
       rules: {
         userType: [

@@ -10,7 +10,7 @@
     >
       <div class="left">
         <el-menu
-          default-active="0"
+          :default-active="active"
           class="el-menu-vertical-demo"
           :background-color="color_block"
           :text-color="color_font"
@@ -39,8 +39,8 @@
 <script>
 import IHeader from 'cps/header/Index'
 
-import { mapState } from 'vuex'
-import { navList } from '@/config/navList'
+import { mapState, mapMutations } from 'vuex'
+import { navList } from '@/config/nav.config'
 
 export default {
   data() {
@@ -49,6 +49,7 @@ export default {
       color_block: '',
       color_font: '',
       navList,
+      active: '0'
     }
   },
   components: {
@@ -64,9 +65,10 @@ export default {
     this.color_font = this.$refs['mainWrapper'].style.getPropertyValue(
       '--text-color'
     )
+    this.getCurrentNavIndex()
   },
   computed: {
-    ...mapState(['theme']),
+    ...mapState(['theme', 'currentNav']),
   },
   watch: {
     theme(nv) {
@@ -80,11 +82,25 @@ export default {
         '--text-color'
       )
     },
+    $route (nv) {
+      this.getCurrentNavIndex()
+    }
   },
   methods: {
+    ...mapMutations(['SET_CURRENT_NAV']),
     handleClickNav(path) {
+      this.SET_CURRENT_NAV(path)
       this.$router.push(`/tra/${path}`)
     },
+    // 计算当前的nav 的 index
+    getCurrentNavIndex () {
+      this.navList.forEach((item, index) => {
+        if (item.path === this.currentNav) {
+          this.active = index + ''
+        }
+      })
+      this.$router.push(`/tra/${this.currentNav}`)
+    }
   },
 }
 </script>

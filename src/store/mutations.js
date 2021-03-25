@@ -12,6 +12,10 @@ const mutations = {
   [types.SET_CURRENT_NAV] (state, nav) {
     state.currentNav = nav
     localStorage.setItem('currentNav', nav)
+  },
+  [types.SET_TOKEN] (state, token) {
+    state.token = token
+    localStorage.setItem('token', token)
   }
 }
 

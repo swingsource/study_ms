@@ -2,29 +2,17 @@
   <my-dialog :title="title" v-model="currentVisible">
     <div slot="content">
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="用户类型" prop="userType">
-          <el-select v-model="form.userType" placeholder="请选择用户类型">
+        <el-form-item label="用户类型">
+          <el-select v-model="form.userType" placeholder="请选择用户类型" :disabled="true">
             <el-option label="管理员" value="admin"></el-option>
             <el-option label="前端用户" value="user"></el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="用户名" prop="username">
-          <el-input v-model="form.username"></el-input>
+        <el-form-item label="用户名">
+          <el-input v-model="form.username" :disabled="true"></el-input>
         </el-form-item>
         <el-form-item label="密码" prop="password">
           <el-input v-model="form.password"></el-input>
-        </el-form-item>
-        <el-form-item label="性别" prop="gender">
-          <el-radio-group v-model="form.gender">
-            <el-radio label="male">男</el-radio>
-            <el-radio label="female">女</el-radio>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="电话" prop="phone">
-          <el-input v-model="form.phone"></el-input>
-        </el-form-item>
-        <el-form-item label="邮箱" prop="email">
-          <el-input v-model="form.email"></el-input>
         </el-form-item>
       </el-form>
     </div>
@@ -69,18 +57,9 @@ export default {
         id: this.row.id,
         userType: this.row.userType,
         username: this.row.username,
-        password: this.row.password,
-        gender: this.row.gender,
-        phone: this.row.phone,
-        email: this.row.email
+        password: this.row.password
       },
       rules: {
-        userType: [
-          { required: true, message: '请选择用户类型', trigger: 'blur' }
-        ],
-        username: [
-          { required: true, message: '请输入用户名', trigger: 'blur' }
-        ],
         password: [
           { required: true, message: '请输入密码', trigger: 'blur' }
         ],
@@ -104,9 +83,6 @@ export default {
         this.form.userType = nv.userType
         this.form.username = nv.username
         this.form.password = nv.password
-        this.form.gender = nv.gender
-        this.form.phone = nv.phone
-        this.form.email = nv.email
       },
       deep: true
     }

@@ -1,6 +1,19 @@
 import instance from '@/util/http'
 
 /**
+ * 登录
+ * @param params
+ * @returns {AxiosPromise}
+ */
+export const login = params => {
+    return instance({
+        url: '/api/user/login',
+        method: 'post',
+        data: params
+    })
+}
+
+/**
  * 获取用户列表
  * @param
  * @returns {AxiosPromise}

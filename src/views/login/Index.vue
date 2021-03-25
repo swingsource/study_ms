@@ -25,7 +25,7 @@
             icon="&#xe60f;"
             style="margin-top: 24px;"
         ></my-input>
-        <div class="btn-submit" @click="handleSubmit">登 录</div>
+        <div class="btn-submit" :class="{'btn-submit-disabled': !this.account || !this.password}" @click="handleSubmit">登 录</div>
       </div>
 <!--      <div class="tips">&#45;&#45; 时光静好与君语，细水流年与君同</div>-->
     </div>
@@ -33,9 +33,10 @@
 </template>
 
 <script>
-import MyInput from 'cps/input/Index'
+import { mapState, mapMutations } from 'vuex'
+import { login } from '@/api/user'
 
-import { mapState } from 'vuex'
+import MyInput from 'cps/input/Index'
 
 export default {
   data() {
@@ -51,8 +52,29 @@ export default {
     ...mapState(['layout'])
   },
   methods: {
+    ...mapMutations(['SET_TOKEN']),
     handleSubmit () {
-      this.$router.push(`/${this.layout}`)
+      if (!this.account || !this.password) {
+        return
+      }
+      const params = {
+        userType: 'admin',
+        username: this.account,
+        password: this.password
+      }
+      login(params).then(res => {
+        if (res.data.code === 200) {
+          // 设置token
+          this.SET_TOKEN(res.data.data[0]['token'])
+          // 跳转路哟
+          this.$router.push(`/${this.layout}`)
+        } else {
+          this.$message({
+            type: 'error',
+            message: res.data.msg
+          })
+        }
+      })
     }
   },
 }
@@ -109,13 +131,16 @@ export default {
       .btn-submit
         margin-top 30px
         width 100%
-        height 36px
-        line-height 36px
+        height 40px
+        line-height 40px
         text-align center
         background var(--color-primary)
         border-radius 6px
         cursor pointer
-        color var(--font-color-main)
+        color #fff
+      .btn-submit-disabled
+        opacity .5
+        cursor not-allowed
     .tips
       font-size 14px
       margin-top 6vh

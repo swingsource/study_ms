@@ -56,29 +56,6 @@
               align="center"
               label="创建时间">
           </el-table-column>
-          <el-table-column
-              prop="avatar"
-              align="center"
-              label="头像">
-          </el-table-column>
-          <el-table-column
-              prop="gender"
-              align="center"
-              label="性别">
-            <template slot-scope="scope">
-              <span v-if="scope.row.gender === 'male'">男</span>
-              <span v-else>女</span>
-            </template>
-          </el-table-column>
-          <el-table-column
-              prop="freeze"
-              align="center"
-              label="是否冻结">
-            <template slot-scope="scope">
-              <span v-if="scope.row.freeze === 'un'">否</span>
-              <span v-else>是</span>
-            </template>
-          </el-table-column>
           <el-table-column label="操作" align="center">
             <template slot-scope="scope">
               <el-button type="primary" size="mini" icon="el-icon-edit" circle @click="handleUpdate(scope.row)"></el-button>
@@ -148,6 +125,10 @@
         getUserList(params).then(res => {
           if (res.data.code === 200) {
             this.userList = res.data.data
+            // 格式化日期
+            this.userList.forEach(_ => {
+              _.createTime = this.$moment(_.createTime - 0).format('YYYY[年]MM[月]DD[日] hh:mm:ss')
+            })
             this.page.total = this.userList.length
             // 分页
             this.getRenderUserList()
@@ -159,7 +140,7 @@
           }
         })
       },
-      // 分页获取 user
+      // 分页获取 user，并且格式化数据
       getRenderUserList () {
         this.renderUserList = fePagination(this.userList, this.page.pageSize, this.page.pageNum)
       },

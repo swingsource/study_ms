@@ -7,7 +7,7 @@
         :key="index + item.path"
         :style="{
           background: `url(${item.img}) no-repeat center center`,
-          'background-size': '100% 100%',
+          'background-size': '100% 100%'
         }"
         @click="handleClickNav(item)"
       >
@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import { navList } from '@/config/navList'
+import { navList } from '@/config/nav.config'
 import { mapState, mapMutations } from 'vuex'
 
 export default {

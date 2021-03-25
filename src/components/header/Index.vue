@@ -102,8 +102,7 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import { navList } from '@/config/navList'
-import { colNum } from '@/config/nav.config'
+import { colNum, navList } from '@/config/nav.config'
 import { groupArray } from '@/util/utils'
 
 export default {
