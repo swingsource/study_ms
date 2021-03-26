@@ -21,8 +21,7 @@
       </el-form>
     </div>
     <div class="table-wrapper">
-      <template>
-        <el-table
+      <el-table
             :data="renderUserList"
             border
             style="width: 100%">
@@ -63,8 +62,6 @@
             </template>
           </el-table-column>
         </el-table>
-      </template>
-
     </div>
     <!-- 分页组件 -->
     <pagination :page-num="page.pageSize"
@@ -140,7 +137,7 @@
           }
         })
       },
-      // 分页获取 user，并且格式化数据
+      // 分页获取 user
       getRenderUserList () {
         this.renderUserList = fePagination(this.userList, this.page.pageSize, this.page.pageNum)
       },
