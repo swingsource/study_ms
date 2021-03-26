@@ -20,6 +20,30 @@ export default [
     component: () => import('@/views/user/Index.vue')
   },
   {
+    path: 'teach',
+    name: 'Teach',
+    meta: {
+      navName: '教程管理'
+    },
+    component: () => import('@/views/teach/Index')
+  },
+  {
+    path: 'chapter',
+    name: 'Chapter',
+    meta: {
+      navName: '目录管理'
+    },
+    component: () => import('@/views/chapter/Index.vue')
+  },
+  {
+    path: 'content',
+    name: 'Content',
+    meta: {
+      navName: '内容管理'
+    },
+    component: () => import('@/views/content/Index.vue')
+  },
+  {
     path: 'book',
     name: 'Book',
     meta: {

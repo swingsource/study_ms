@@ -15,6 +15,24 @@ export const navList = [
         img: require('./../assets/image/bg-nav-06.png')
     },
     {
+        name: '教程管理',
+        icon: 'el-icon-s-opportunity',
+        path: 'teach',
+        img: require('./../assets/image/bg-nav-03.png')
+    },
+    {
+        name: '目录管理',
+        icon: 'el-icon-collection-tag',
+        path: 'chapter',
+        img: require('./../assets/image/bg-nav-03.png')
+    },
+    {
+        name: '内容管理',
+        icon: 'el-icon-document',
+        path: 'content',
+        img: require('./../assets/image/bg-nav-03.png')
+    },
+    {
         name: '书籍管理',
         icon: 'el-icon-reading',
         path: 'book',
