@@ -74,5 +74,13 @@ export default [
       navName: '前台监测'
     },
     component: () => import('@/views/monitor/Index.vue')
+  },
+  {
+    path: 'shell',
+    name: 'Shell',
+    meta: {
+      navName: '导入教程'
+    },
+    component: () => import('@/views/likeShell/Index.vue')
   }
 ]

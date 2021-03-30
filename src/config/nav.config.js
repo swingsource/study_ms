@@ -55,5 +55,11 @@ export const navList = [
         icon: 'el-icon-data-line',
         path: 'monitor',
         img: require('./../assets/image/bg-nav-09.png')
+    },
+    {
+        name: '导入教程',
+        icon: 'el-icon-coin',
+        path: 'shell',
+        img: require('./../assets/image/bg-nav-09.png')
     }
 ]
