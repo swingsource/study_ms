@@ -23,35 +23,35 @@
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="作者简介">
+            <el-form-item label="作者简介" prop="authorIntroduce">
               <el-input type="textarea" :rows="3" v-model="form.authorIntroduce"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="书籍特色">
+            <el-form-item label="书籍特色" prop="features">
               <el-input type="textarea" :rows="4" v-model="form.features"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="所有章节">
+            <el-form-item label="所有章节" prop="chapter">
               <el-input type="textarea" :rows="8" v-model="form.chapter" placeholder="如有多个，请使用英文逗号（','）分隔"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="详情">
+            <el-form-item label="详情" prop="detail">
               <el-input type="textarea" :rows="8" v-model="form.detail"></el-input>
             </el-form-item>
           </el-col>
         </el-row>
         <el-row>
           <el-col :span="24">
-            <el-form-item label="购买地址">
+            <el-form-item label="购买地址" prop="buySelect">
               <el-input type="textarea" :rows="3" v-model="form.buySelect" placeholder="如有多个，请使用英文逗号（','）分隔"></el-input>
             </el-form-item>
           </el-col>
