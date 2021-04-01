@@ -169,10 +169,12 @@ export default {
     },
     // 添加内容
     handleAddContent (row) {
+      console.log(this.form.teachId, row.id)
       this.$router.push({
-        path: '/tra/content',
-        query: {
+        name: 'Content',
+        params: {
           teachId: this.form.teachId,
+          parentId: row.parentId,
           id: row.id
         }
       })
