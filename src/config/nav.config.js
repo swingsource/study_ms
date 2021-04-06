@@ -47,7 +47,7 @@ export const navList = [
     {
         name: '推荐审核',
         icon: 'el-icon-view',
-        path: 'approval',
+        path: 'recommend',
         img: require('./../assets/image/bg-nav-05.png')
     },
     {

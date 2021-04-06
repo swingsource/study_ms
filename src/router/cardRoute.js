@@ -36,12 +36,12 @@ export default [
     component: () => import('@/views/message/Index.vue')
   },
   {
-    path: 'approval',
-    name: 'Approval',
+    path: 'recommend',
+    name: 'Recommend',
     meta: {
       navName: '推荐审核'
     },
-    component: () => import('@/views/approval/Index.vue')
+    component: () => import('@/views/recommend/Index.vue')
   },
   {
     path: 'monitor',
