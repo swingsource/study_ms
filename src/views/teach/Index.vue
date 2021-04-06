@@ -69,26 +69,30 @@
     ></pagination>
     <!-- 添加教程 -->
     <add-dialog v-model="addVisible" @success="handleReloadData"></add-dialog>
+    <!-- 通过json导入教程 -->
+    <add-dialog-json v-model="addByJsonVisible" @success="handleReloadData"></add-dialog-json>
     <!-- 修改教程 -->
     <update-dialog v-model="updateVisible" :row="currentRow" @success="handleReloadData"></update-dialog>
   </div>
 </template>
 
 <script>
-import { getTeachList, delTeach, addTeach } from "@/api/teach"
+import { getTeachList, delTeach } from "@/api/teach"
 import { fePagination } from "@/util/utils"
 import { mapMutations } from 'vuex'
 
 import Pagination from '@/core/pagination/Index'
 import UpdateDialog from './Update'
 import AddDialog from './Add'
+import AddDialogJson from './AddByJSON'
 
 export default {
   name: "Index",
   components: {
     Pagination,
     UpdateDialog,
-    AddDialog
+    AddDialog,
+    AddDialogJson
   },
   data () {
     return {
@@ -105,7 +109,8 @@ export default {
       renderTeachList: [],
       updateVisible: false,
       currentRow: {},
-      addVisible: false
+      addVisible: false,
+      addByJsonVisible: false
     }
   },
   watch: {
@@ -160,16 +165,17 @@ export default {
     },
     // 通过json导入数据
     handleAddByJson() {
-      this.$confirm('是否跳转到 导入教程 页面进行导入?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
-        type: 'warning'
-      }).then(() => {
-        this.SET_CURRENT_NAV('shell')
-        this.$router.push('/tra/shell')
-      }).catch(() => {
-        //
-      })
+      // this.$confirm('是否跳转到 导入教程 页面进行导入?', '提示', {
+      //   confirmButtonText: '确定',
+      //   cancelButtonText: '取消',
+      //   type: 'warning'
+      // }).then(() => {
+      //   this.SET_CURRENT_NAV('shell')
+      //   this.$router.push('/tra/shell')
+      // }).catch(() => {
+      //   //
+      // })
+      this.addByJsonVisible = true
     },
     // 查询教程
     handleSearch () {
