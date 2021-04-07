@@ -6,5 +6,7 @@ export default {
   // 当前选中菜单
   currentNav: localStorage.getItem('currentNav') || 'home',
   // token
-  token: localStorage.getItem('token') || ''
+  token: localStorage.getItem('token') || '',
+  // user
+  user: JSON.parse(localStorage.getItem('user')) || {}
 }
