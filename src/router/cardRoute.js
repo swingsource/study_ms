@@ -20,6 +20,30 @@ export default [
     component: () => import('@/views/user/Index.vue')
   },
   {
+    path: 'teach',
+    name: 'Teach',
+    meta: {
+      navName: '教程管理'
+    },
+    component: () => import('@/views/teach/Index')
+  },
+  {
+    path: 'chapter',
+    name: 'Chapter',
+    meta: {
+      navName: '目录管理'
+    },
+    component: () => import('@/views/chapter/Index.vue')
+  },
+  {
+    path: 'content',
+    name: 'Content',
+    meta: {
+      navName: '内容管理'
+    },
+    component: () => import('@/views/content/Index.vue')
+  },
+  {
     path: 'book',
     name: 'Book',
     meta: {
@@ -42,21 +66,5 @@ export default [
       navName: '推荐审核'
     },
     component: () => import('@/views/recommend/Index.vue')
-  },
-  {
-    path: 'monitor',
-    name: 'Monitor',
-    meta: {
-      navName: '前台监测'
-    },
-    component: () => import('@/views/monitor/Index.vue')
-  },
-  {
-    path: 'shell',
-    name: 'Shell',
-    meta: {
-      navName: '导入教程'
-    },
-    component: () => import('@/views/likeShell/Index.vue')
   }
 ]

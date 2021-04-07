@@ -66,21 +66,5 @@ export default [
       navName: '推荐审核'
     },
     component: () => import('@/views/recommend/Index.vue')
-  },
-  {
-    path: 'monitor',
-    name: 'Monitor',
-    meta: {
-      navName: '前台监测'
-    },
-    component: () => import('@/views/monitor/Index.vue')
-  },
-  {
-    path: 'shell',
-    name: 'Shell',
-    meta: {
-      navName: '导入教程'
-    },
-    component: () => import('@/views/likeShell/Index.vue')
   }
 ]
