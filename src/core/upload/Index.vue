@@ -7,7 +7,6 @@
             action=""
             :show-file-list="false"
             :auto-upload="true"
-            :on-success="handleSuccess"
             :on-change="beforeUpload"
             :http-request="handleUpload">
           <img v-if="currentImgUrl" :src="currentImgUrl" class="avatar" />
@@ -97,8 +96,7 @@ export default {
           })
         }
       })
-    },
-    handleSuccess () {},
+    }
   }
 }
 </script>

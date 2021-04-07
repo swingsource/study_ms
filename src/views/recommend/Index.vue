@@ -65,7 +65,7 @@
             <el-link type="danger" v-if="scope.row.approval === 'reject'">未通过</el-link>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" width="160px" style="display: flex; justify-content: flex-end;">
+        <el-table-column label="操作" align="right" width="140px">
           <template slot-scope="scope">
             <el-button type="success" size="mini" icon="el-icon-check" v-if="scope.row.approval === 'un'" circle @click="handleAgree(scope.row)"></el-button>
             <el-button type="warning" size="mini" icon="el-icon-close" v-if="scope.row.approval === 'un'" circle @click="handleReject(scope.row)"></el-button>
