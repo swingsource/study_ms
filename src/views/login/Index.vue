@@ -22,6 +22,7 @@
             placeholder="请输入密码"
             type="password"
             v-model="password"
+            @keyup.enter.native="handleSubmit"
             icon="&#xe60f;"
             style="margin-top: 24px;"
         ></my-input>
