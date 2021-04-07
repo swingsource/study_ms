@@ -52,8 +52,9 @@
             align="center"
             label="添加日期">
         </el-table-column>
-        <el-table-column label="操作" align="center" width="120px">
+        <el-table-column label="操作" align="center" width="160px">
           <template slot-scope="scope">
+            <el-button type="success" size="mini" icon="el-icon-picture-outline" circle @click="handleUpload(scope.row)"></el-button>
             <el-button type="primary" size="mini" icon="el-icon-edit" circle @click="handleUpdate(scope.row)"></el-button>
             <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="handleDel(scope.row)"></el-button>
           </template>
@@ -73,11 +74,13 @@
     <add-dialog-json v-model="addByJsonVisible" @success="handleReloadData"></add-dialog-json>
     <!-- 修改教程 -->
     <update-dialog v-model="updateVisible" :row="currentRow" @success="handleReloadData"></update-dialog>
+    <!-- 上传封面文件 -->
+    <my-upload v-model="visibleUploadAdd" @uploadSuccess="handleUploadSuccess" :img-url="currentRow.coverUrl" title="封面"></my-upload>
   </div>
 </template>
 
 <script>
-import { getTeachList, delTeach } from "@/api/teach"
+import { getTeachList, delTeach, updateTeach } from "@/api/teach"
 import { fePagination } from "@/util/utils"
 import { mapMutations } from 'vuex'
 
@@ -85,6 +88,8 @@ import Pagination from '@/core/pagination/Index'
 import UpdateDialog from './Update'
 import AddDialog from './Add'
 import AddDialogJson from './AddByJSON'
+import MyUpload from 'core/upload/Index'
+import {updateBook} from "@/api/book";
 
 export default {
   name: "Index",
@@ -92,7 +97,8 @@ export default {
     Pagination,
     UpdateDialog,
     AddDialog,
-    AddDialogJson
+    AddDialogJson,
+    MyUpload
   },
   data () {
     return {
@@ -110,7 +116,8 @@ export default {
       updateVisible: false,
       currentRow: {},
       addVisible: false,
-      addByJsonVisible: false
+      addByJsonVisible: false,
+      visibleUploadAdd: false,
     }
   },
   watch: {
@@ -210,6 +217,30 @@ export default {
         })
       }).catch(() => {
         //
+      })
+    },
+    // 上传图片
+    handleUpload (row) {
+      this.visibleUploadAdd = true
+      this.currentRow = row
+      console.log(this.currentRow)
+    },
+    // 上传图片成功
+    handleUploadSuccess (imgUrl) {
+      // 更新当前行数据的图片地址
+      const params = {
+        id: this.currentRow.id,
+        coverUrl: imgUrl
+      }
+      updateTeach(params).then(res => {
+        if (res.data.code !== 200) {
+          this.$message({
+            type: 'error',
+            message: res.data.msg
+          })
+        } else {
+          this.handleReloadData()
+        }
       })
     },
     // 重新加载数据

@@ -52,6 +52,7 @@
         </el-table-column>
         <el-table-column label="操作" align="center" width="180px">
           <template slot-scope="scope">
+            <el-button type="success" size="mini" icon="el-icon-picture-outline" circle @click="handleUpload(scope.row)"></el-button>
             <el-button type="primary" size="mini" icon="el-icon-edit" circle @click="handleUpdate(scope.row)"></el-button>
             <el-button type="warning" size="mini" icon="el-icon-view" circle @click="handlePreview(scope.row)"></el-button>
             <el-button type="danger" size="mini" icon="el-icon-delete" circle @click="handleDel(scope.row)"></el-button>
@@ -73,17 +74,20 @@
     <preview-dialog v-model="visiblePreview" :row="currentRow"></preview-dialog>
     <!-- 修改书籍 -->
     <update-dialog v-model="visibleUpdate" :row="currentRow" @success="handleReloadData"></update-dialog>
+    <!-- 上传封面文件 -->
+    <my-upload v-model="visibleUploadAdd" @uploadSuccess="handleUploadSuccess" :img-url="currentRow.coverUrl" title="封面"></my-upload>
   </div>
 </template>
 
 <script>
-import { getBookList, delBook } from "@/api/book"
+import { getBookList, delBook, updateBook } from "@/api/book"
 import { fePagination } from "@/util/utils"
 
 import Pagination from 'core/pagination/Index'
 import AddDialog from './Add'
 import PreviewDialog from './Preview'
 import UpdateDialog from './Update'
+import MyUpload from 'core/upload/Index'
 
 export default {
   name: "Index",
@@ -91,7 +95,8 @@ export default {
     Pagination,
     AddDialog,
     PreviewDialog,
-    UpdateDialog
+    UpdateDialog,
+    MyUpload
   },
   data () {
     return {
@@ -109,6 +114,7 @@ export default {
       visibleAdd: false,
       visiblePreview: false,
       visibleUpdate: false,
+      visibleUploadAdd: false,
       currentRow: {}, // 当前操作的行数据
     }
   },
@@ -180,6 +186,29 @@ export default {
             type: 'error',
             message: res.data.msg
           })
+        }
+      })
+    },
+    // 上传图片
+    handleUpload (row) {
+      this.visibleUploadAdd = true
+      this.currentRow = row
+    },
+    // 上传图片成功
+    handleUploadSuccess (imgUrl) {
+      // 更新当前行数据的图片地址
+      const params = {
+        id: this.currentRow.id,
+        coverUrl: imgUrl
+      }
+      updateBook(params).then(res => {
+        if (res.data.code !== 200) {
+          this.$message({
+            type: 'error',
+            message: res.data.msg
+          })
+        } else {
+          this.handleReloadData()
         }
       })
     },
