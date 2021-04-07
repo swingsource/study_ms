@@ -2,7 +2,7 @@
   <div class="header">
     <div class="left">
       <img src="./logo.png" alt="" />
-      <span class="title">elementui test</span>
+      <span class="title">欢迎使用山茶学习网管理系统</span>
       <!-- card模式下，进入详情页面之后才会显示出来的导航菜单 -->
       <div class="nav-card-wrapper" v-if="layout === 'card' && showCurrentNav">
         <div class="current-nav" @click="handleClickCurrentNav">
@@ -87,7 +87,7 @@
       <div class="username">
         <el-dropdown>
           <span class="el-dropdown-link">
-            我在等风
+            {{user.username}}
           </span>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item @click.native="handleLogout" class="i-item"
@@ -118,9 +118,9 @@ export default {
     }
   },
   computed: {
-    ...mapState(['theme', 'layout', 'currentNav']),
+    ...mapState(['theme', 'layout', 'currentNav', 'user']),
   },
-  mounted() {
+  mounted () {
     this.currentNavList = groupArray(navList, colNum)
     this.currentNavName = this.$route.meta.navName
     this.showCurrentNav = this.currentNav !== 'home'
@@ -139,7 +139,7 @@ export default {
     },
   },
   methods: {
-    ...mapMutations(['SET_THEME', 'SET_LAYOUT', 'SET_CURRENT_NAV']),
+    ...mapMutations(['SET_THEME', 'SET_LAYOUT', 'SET_CURRENT_NAV', 'SET_TOKEN', 'SET_USER']),
     // 切换主题
     handleSwitchTheme(theme) {
       document.documentElement.setAttribute('theme', theme)
@@ -173,7 +173,18 @@ export default {
     },
     // 退出登录
     handleLogout() {
-      this.$router.push('/login')
+      this.$confirm('是否要退出登录?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$router.push('/login')
+        // 清除登录信息
+        this.SET_TOKEN('')
+        this.SET_USER({})
+      }).catch(() => {
+        //
+      });
     },
   },
 }
@@ -194,6 +205,7 @@ export default {
     img
       width 32px
       height 32px
+      animation my-rotate 4.2s infinite linear
     .title
       margin 0 60px 0 12px
       font-size 20px
@@ -289,4 +301,9 @@ export default {
           font-size var(--font-size-normal)
           color var(--font-color-main)
           background var(--color-block)
+@keyframes my-rotate
+  0%
+    transform rotate(0)
+  100%
+    transform rotate(360deg)
 </style>

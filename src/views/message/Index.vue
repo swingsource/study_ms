@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { getCommentList, addComment, delComment } from "@/api/comment"
+import { getCommentList, delComment } from "@/api/comment"
 import { getTeachList } from "@/api/teach"
 import { fePagination } from "@/util/utils"
 
@@ -122,10 +122,6 @@ export default {
        }
        getCommentList(params).then(res => {
          if (res.data.code === 200) {
-           this.$message({
-             type: 'success',
-             message: res.data.msg
-           })
            this.serverList = res.data.data
            // 格式化日期
            this.serverList.forEach(_ => {
@@ -159,6 +155,31 @@ export default {
      handleSearch () {
        this._getCommentList()
      },
+     // 删除
+     handleDel (row) {
+       this.$confirm('确定要删除该条留言么？', '提示', {
+         confirmButtonText: '确定',
+         cancelButtonText: '取消',
+         type: 'warning'
+       }).then(() => {
+         delComment({ id: row.id }).then(res => {
+           if (res.data.code === 200) {
+             this.$message({
+               type: 'success',
+               message: res.data.msg
+             })
+             this._getCommentList()
+           } else {
+             this.$message({
+               type: 'error',
+               message: res.data.msg
+             })
+           }
+         })
+       }).catch(() => {
+         //
+       })
+     }
    }
  }
 </script>

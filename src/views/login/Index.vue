@@ -52,7 +52,7 @@ export default {
     ...mapState(['layout'])
   },
   methods: {
-    ...mapMutations(['SET_TOKEN']),
+    ...mapMutations(['SET_TOKEN', 'SET_USER']),
     handleSubmit () {
       if (!this.account || !this.password) {
         return
@@ -66,6 +66,9 @@ export default {
         if (res.data.code === 200) {
           // 设置token
           this.SET_TOKEN(res.data.data[0]['token'])
+          // 存储当前用户信息
+          res.data.data[0].password = '-'
+          this.SET_USER(res.data.data[0])
           // 跳转路哟
           this.$router.push(`/${this.layout}`)
         } else {

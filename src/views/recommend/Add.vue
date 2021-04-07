@@ -24,6 +24,7 @@
 
 <script>
 import { addRecommend } from '@/api/recommend'
+import { mapState } from 'vuex'
 
 import MyDialog from 'core/dialog/Index'
 
@@ -49,7 +50,8 @@ export default {
       form: {
         title: '',
         url: '',
-        introduction: ''
+        introduction: '',
+        recommender: this.$store.state.user.username
       },
       rules: {
         title: [
@@ -72,6 +74,9 @@ export default {
     currentVisible (nv) {
       this.$emit('updateVisible', nv)
     }
+  },
+  computed: {
+    ...mapState(['user'])
   },
   methods: {
     // 初始化
